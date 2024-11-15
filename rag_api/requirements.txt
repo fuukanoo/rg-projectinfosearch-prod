@@ -20,7 +20,3 @@ azure-cosmos
 ipdb
 fastapi
 uvicorn
-
-python-docx
-pandas
-python-pptx
