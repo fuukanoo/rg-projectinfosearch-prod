@@ -1,4 +1,4 @@
-# Azure AIサービスを利用したRAG (まだ未完成)
+# Azure AIサービスを利用したRAG 
  
  
 ## 目次
@@ -25,11 +25,11 @@ RAG（Retrieval-Augmented Generation）は、事前に収集した大量のデ�
  
 - **Azure サブスクリプション**
 - **Azure Functions Core Tools**
-- **Azure Computer Vision**
+- **Azure Cosmos DB**
+- **Azure Blob Storage**
 - **Azure Document Intelligence**
 - **Azure AI Search**
 - **Azure OpenAI**
-- **Azure **
 - **Python 3.10**
 - **VSCode**
 - **Azure CLI**
@@ -39,8 +39,8 @@ RAG（Retrieval-Augmented Generation）は、事前に収集した大量のデ�
 ## 環境構築
  
 ```
-git clone https://github.com/sakuya10969/rag.git
-cd rag
+git clone git@gitlab.com:intelligentforce/azure_rag.git
+cd azure_rag
 ```
  
 ### 仮想環境の構築と必要なライブラリのインストール
@@ -56,22 +56,26 @@ pip install -r requirements.txt
 それぞれのバリューには適切なものを入力してください
 ```
 {
-  "IsEncrypted": false,
-  "Values": {
-    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
-    "FUNCTIONS_WORKER_RUNTIME": "python",
-    "COMPUTER_VISION_KEY": "your_computer_vision_key",
-    "COMPUTER_VISION_ENDPOINT": "your_computer_vision_endpoint",
-    "OPENAI_KEY": "your_openai_key,
-    "OPENAI_ENDPOINT": "your_openai_endpoint",
-    "DOCUMENT_INTELLIGENCE_KEY":your_document_intelligence_key",
-    "DOCUMENT_INTELLIGENCE_ENDPOINT":"your_document_intelligence_endpoint",
-    "BLOB_STORAGE_CONNECTION_STRING":"your_blob_storage_connection_string",
-    "AI_SEARCH_KEY":"your_ai_search_key",
-    "AI_SEARCH_ENDPOINT":"your_ai_search_endpoint",
-    "AI_SEARCH_ADMIN_KEY":"your_ai_search_admin_key"
-  }
-}
+    "IsEncrypted": false,
+    "Values": {
+      "AzureWebJobsStorage": "seDevelopmentStorage=true",
+      "FUNCTIONS_WORKER_RUNTIME": "python",
+      "COMPUTER_VISION_API_KEY": "0e9d45323e834cd3a0b566ab8a75e9e9",
+      "COMPUTER_VISION_ENDPOINT": "https://cv-rag-dev.cognitiveservices.azure.com/",
+      "AZURE_OPENAI_API_KEY":"a501328d19a04df89960b2c636af48f4",
+      "AZURE_OPENAI_ENDPOINT":"https://shuns-m2mw0u2v-westeurope.openai.azure.com/openai/deployments/gpt-35-turbo/chat/completions?api-version=2024-08-01-preview",
+      "AZURE_OPENAI_EMBEDDING_API_KEY":"a501328d19a04df89960b2c636af48f4",
+      "AZURE_OPENAI_EMBEDDING_ENDPOINT":"https://shuns-m2mw0u2v-westeurope.openai.azure.com/openai/deployments/text-embedding-ada-002/embeddings?api-version=2023-05-15",
+      "DOCUMENT_INTELLIGENCE_API_KEY":"bb4b80af7f3347a38e44af9acbe92ac7",
+      "DOCUMENT_INTELLIGENCE_ENDPOINT":"https://di-rag-dev.cognitiveservices.azure.com/",
+      "AZURE_SEARCH_ENDPOINT":"https://srch-rag-dev-013.search.windows.net",
+      "AZURE_SEARCH_ADMIN_KEY":"NOI2T2fDQ2gn3ulIqhz1fFIzJ5SR5USRrs9zQTJc2cAzSeBUhqbV",
+      "AZURE_STORAGE_CONNECTION_STRING":"DefaultEndpointsProtocol=https;AccountName=strag013;AccountKey=giUJhMCOlk9uaKTg27MQ8q5RxMpcMHebyvK/aUfRLvuczCsbMGfXEhVKFVWNjXlxMN886zBkeDgE+AStPXA1fg==;EndpointSuffix=core.windows.net",
+      "BLOB_CONTAINER":"container-rag-dev",
+      "COSMOS_DB_ENDPOINT":"https://cosdb-rag-dev.documents.azure.com:443/",
+      "COSMOS_DB_KEY":"Vj3kGrgw6Lt9K0EiHB72ExuhFbCrKAmmdxdeufuPo1yj2LZ4IT49O2vCTmWbT7RBoaj1Z3kZhWcIACDbFgYk2A=="
+
+    }
 ```
  
  
