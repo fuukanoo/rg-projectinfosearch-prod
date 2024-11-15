@@ -18,6 +18,8 @@ azure-identity
 azure-search-documents==11.6.0b3
 azure-cosmos
 ipdb
+fastapi
+uvicorn
 
 python-docx
 pandas

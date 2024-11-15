@@ -1,13 +1,16 @@
-import React from 'react';
-import ChatUI from './chatUI';
+import React from "react";
+import TextInput from "./components/TextInput";
+import FileInput from "./components/FileInput";
 
-function App() {
+const App = () => {
   return (
     <div>
-      <ChatUI />
+      <h1>My App</h1>
+      <TextInput />
+      <FileInput />
     </div>
   );
-}
+};
 
 export default App;
 
