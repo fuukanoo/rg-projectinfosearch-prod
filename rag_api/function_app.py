@@ -1,4 +1,5 @@
 import azure.functions as func
+from fastapi import FastAPI, HTTPException
 import os
 from azure.storage.blob import BlobServiceClient
 import logging
@@ -14,6 +15,7 @@ from process_rag import process_rag
 blob_connection_string = os.getenv("AZURE_STORAGE_CONNECTION_STRING")
 blob_container = os.getenv("BLOB_CONTAINER")
 
+app = FastAPI()
 
 # route setting
 app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
