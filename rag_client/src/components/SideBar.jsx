@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {Box, Drawer, List, ListItem, ListItemText, Typography, Divider, IconButton } from "@mui/material";
+import {Box,  Drawer, List, ListItem, ListItemText, Typography, Divider, IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 
 const SideBar = ({ chatHistory, onSelectChat }) => {

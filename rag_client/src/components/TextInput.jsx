@@ -1,32 +1,32 @@
 import React, { useState } from "react";
-import { TextField, Typography, Box } from "@mui/material";
+import { Box, TextField, IconButton } from "@mui/material";
+import SendIcon from "@mui/icons-material/Send";
 
-const TextInputWithMaterialUI = () => {
+const TextInput = ({ onSendMessage }) => {
   const [text, setText] = useState("");
 
-  // テキスト変更時のイベントハンドラー
-  const handleChange = (event) => {
-    setText(event.target.value);
+  const handleSend = () => {
+    if (text.trim()) {
+      onSendMessage(text);
+      setText("");
+    }
   };
 
   return (
-    <Box sx={{ padding: "20px", maxWidth: "400px", margin: "0 auto" }}>
-      <Typography variant="h5" gutterBottom>
-        Material-UI Text Input Component
-      </Typography>
+    <Box sx={{ display: "flex", alignItems: "center", padding: "8px", width: "60%" }}>
       <TextField
-        label="Type something..."
-        variant="outlined"
         fullWidth
+        variant="outlined"
+        placeholder="質問を入力してください..."
         value={text}
-        onChange={handleChange}
-        sx={{ marginBottom: "20px" }}
+        onChange={(e) => setText(e.target.value)}
+        sx={{ marginRight: "8px", flexGrow: 1 }} // flexGrow で幅を自動調整
       />
-      <Typography variant="body1">
-        You typed: <strong>{text}</strong>
-      </Typography>
+      <IconButton color="primary" onClick={handleSend}>
+        <SendIcon />
+      </IconButton>
     </Box>
   );
 };
 
-export default TextInputWithMaterialUI;
+export default TextInput;

@@ -1,32 +1,61 @@
 import React, { useState } from "react";
-import { Button, Typography, Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
+import UploadFileIcon from '@mui/icons-material/UploadFile';
+import axios from "axios";
 
-const FileUpload = () => {
-  const [fileName, setFileName] = useState("");
+const FileInput = ({ onFileUpload }) => {
+  const [selectedFile, setSelectedFile] = useState(null);
 
-  // ファイルが選択されたときのイベントハンドラー
   const handleFileChange = (event) => {
     if (event.target.files.length > 0) {
-      setFileName(event.target.files[0].name);
+      setSelectedFile(event.target.files[0]);
+    }
+  };
+
+  const handleFileUpload = async () => {
+    if (!selectedFile) return;
+
+    const formData = new FormData();
+    formData.append("file", selectedFile);
+
+    try {
+      const response = await axios.post("http://localhost:7071/api/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      onFileUpload(selectedFile.name);  // ファイル名をChatAreaに表示
+      setSelectedFile(null);
+    } catch (error) {
+      console.error("Error uploading file:", error);
     }
   };
 
   return (
-    <Box sx={{ padding: "20px", maxWidth: "400px", margin: "0 auto", textAlign: "center" }}>
+    <Box sx={{ display: "flex", alignItems: "center" }}>
       <Button
-        variant="contained"
+        variant="outlined"
         component="label"
-        sx={{ marginBottom: "20px" }}
+        startIcon={<UploadFileIcon />}
       >
-        Upload File
+        ファイルを選択
         <input
           type="file"
           hidden
           onChange={handleFileChange}
         />
       </Button>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleFileUpload}
+        disabled={!selectedFile}
+        sx={{ marginLeft: "8px" }}
+      >
+        ファイルを送信
+      </Button>
     </Box>
   );
 };
 
-export default FileUpload;
+export default FileInput;
