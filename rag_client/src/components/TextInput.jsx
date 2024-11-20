@@ -1,30 +1,29 @@
 import React, { useState } from "react";
-import { Box, TextField, IconButton } from "@mui/material";
-import SendIcon from "@mui/icons-material/Send";
+import { Box, TextField, Button } from "@mui/material";
 
 const TextInput = ({ onSendMessage }) => {
   const [text, setText] = useState("");
 
   const handleSend = () => {
     if (text.trim()) {
-      onSendMessage(text);
-      setText("");
+      onSendMessage(text); // テキストを親に渡す
+      setText(""); // 入力フィールドをクリア
     }
   };
 
   return (
-    <Box sx={{ display: "flex", alignItems: "center", padding: "8px", width: "60%" }}>
+    <Box sx={{ display: "flex", alignItems: "center", width: "70%" }}>
       <TextField
         fullWidth
-        variant="outlined"
-        placeholder="質問を入力してください..."
         value={text}
         onChange={(e) => setText(e.target.value)}
-        sx={{ marginRight: "8px", flexGrow: 1 }} // flexGrow で幅を自動調整
+        placeholder="メッセージを入力..."
+        variant="outlined"
+        size="small"
       />
-      <IconButton color="primary" onClick={handleSend}>
-        <SendIcon />
-      </IconButton>
+      <Button onClick={handleSend} variant="contained" sx={{ marginLeft: 2 }}>
+        送信
+      </Button>
     </Box>
   );
 };

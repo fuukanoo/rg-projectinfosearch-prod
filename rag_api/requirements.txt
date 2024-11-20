@@ -20,3 +20,12 @@ azure-cosmos
 ipdb
 fastapi
 uvicorn
+azure-functions
+python-multipart
+
+python-pptx
+python-docx 
+python-magic
+openpyxl 
+pdfkit
+fpdf

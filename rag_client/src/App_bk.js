@@ -6,15 +6,17 @@ import ChatArea from "./components/ChatArea";
 import { Box, CircularProgress, Typography } from "@mui/material";
 
 const App = () => {
-  const [chatHistory, setChatHistory] = useState([]); // 会話履歴
-  const [messages, setMessages] = useState([]); // 現在表示中のメッセージ
+  const [chatHistory, setChatHistory] = useState([]);
+  const [messages, setMessages] = useState([]);
   const [isUploading, setIsUploading] = useState(false); // アップロード中
   const [isGenerating, setIsGenerating] = useState(false); // LLM回答生成中
 
   const handleSendMessage = async (text) => {
     setIsGenerating(true); // 回答生成開始
-    const questionMessage = { type: "question", content: text };
-    setMessages((prevMessages) => [...prevMessages, questionMessage]);
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { type: "question", content: text },
+    ]);
 
     try {
       const response = await fetch("http://localhost:7071/answer", {
@@ -23,18 +25,11 @@ const App = () => {
         body: JSON.stringify({ user_question: text }),
       });
       const data = await response.json();
-      const answerMessage = { type: "answer", content: data.answer };
+      console.log("バックエンドからの返答:", data);
 
-      setMessages((prevMessages) => [...prevMessages, answerMessage]);
-
-      // 会話履歴に追加
-      setChatHistory((prevHistory) => [
-        ...prevHistory,
-        {
-          id: prevHistory.length + 1,
-          title: text.slice(0, 20) || "新しい会話", // 質問の最初の20文字をタイトルに使用
-          messages: [...messages, questionMessage, answerMessage], // 質問と回答を保存
-        },
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { type: "answer", content: data.answer },
       ]);
     } catch (error) {
       console.error("エラー: チャット応答の取得に失敗しました。", error);
@@ -68,17 +63,14 @@ const App = () => {
   };
 
   const handleSelectChat = (chat) => {
-    // 選択された会話を現在のメッセージにセット
-    setMessages(chat.messages);
+    console.log("選択されたチャット:", chat);
   };
 
   return (
     <Box sx={{ display: "flex", height: "100vh" }}>
-      {/* サイドバーに履歴を表示 */}
       <SideBar chatHistory={chatHistory} onSelectChat={handleSelectChat} />
       <Box sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}>
         <Box sx={{ flexGrow: 1, overflowY: "auto", padding: 2 }}>
-          {/* 現在のメッセージを表示 */}
           <ChatArea messages={messages} />
         </Box>
         <Box
@@ -87,23 +79,23 @@ const App = () => {
             borderTop: "1px solid #ddd",
             display: "flex",
             justifyContent: "center",
-            alignItems: "center",
-            gap: 2,
+            alignItems: "center", // 中央揃え
+            gap: 2, // 要素間のスペース
           }}
         >
-          {isUploading && (
+          {isUploading && ( // アップロード中の表示
             <Box display="flex" alignItems="center" gap={1}>
               <CircularProgress size={24} />
               <Typography>ファイルアップロード中...</Typography>
             </Box>
           )}
-          {isGenerating && (
+          {isGenerating && ( // 回答生成中の表示
             <Box display="flex" alignItems="center" gap={1}>
               <CircularProgress size={24} />
               <Typography>回答生成中...</Typography>
             </Box>
           )}
-          {!isUploading && !isGenerating && (
+          {!isUploading && !isGenerating && ( // 通常時の入力エリア
             <>
               <FileInput onFileUpload={handleFileUpload} />
               <TextInput onSendMessage={handleSendMessage} />
