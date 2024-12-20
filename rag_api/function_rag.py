@@ -1,25 +1,26 @@
 import azure.functions as func
+
 import openai
 from fastapi import FastAPI, HTTPException, UploadFile, File, Form
 from fastapi.responses import JSONResponse
 import os
 import logging
 import uuid
-from datetime import datetime
+#from datetime import datetime
 from langchain_openai import AzureChatOpenAI, AzureOpenAIEmbeddings
 from langchain_community.document_loaders import AzureAIDocumentIntelligenceLoader
 from langchain.text_splitter import MarkdownHeaderTextSplitter
 from langchain_community.vectorstores import AzureSearch
-import requests
-import ipdb
+#import requests
+#import ipdb
 from langchain import hub
 from langchain.schema import StrOutputParser
 from langchain.schema.runnable import RunnablePassthrough
-from operator import itemgetter
-from langchain.schema.runnable import RunnableMap
+#from operator import itemgetter
+#from langchain.schema.runnable import RunnableMap
 from pydantic import BaseModel
 
-# from docx import Document
+# from docx import Documentt
 # from io import BytesIO
 # from fpdf import FPDF
 # from fastapi import UploadFile, HTTPException
