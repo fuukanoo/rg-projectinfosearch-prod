@@ -20,7 +20,7 @@ from langchain.schema.runnable import RunnablePassthrough
 #from langchain.schema.runnable import RunnableMap
 from pydantic import BaseModel
 
-# from docx import Documentt
+# from docx import Document
 # from io import BytesIO
 # from fpdf import FPDF
 # from fastapi import UploadFile, HTTPException

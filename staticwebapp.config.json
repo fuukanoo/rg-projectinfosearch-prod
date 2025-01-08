@@ -1,0 +1,10 @@
+{
+    "routes": [
+      {
+        "route": "/rag_api/*",
+        "methods": ["GET", "POST"],
+        "backend": "rag_api"
+      }
+    ]
+  }
+  
