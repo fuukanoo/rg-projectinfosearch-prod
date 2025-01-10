@@ -1,10 +1,9 @@
 {
-    "routes": [
-      {
-        "route": "/rag_api/*",
-        "methods": ["GET", "POST"],
-        "backend": "rag_api"
-      }
-    ]
-  }
+  "routes": [
+    {
+      "route": "/api/*",
+      "rewrite": "https://func-projectinfosearch-prod3.azurewebsites.net/api/{*}"
+    }
+  ]
+}
   
